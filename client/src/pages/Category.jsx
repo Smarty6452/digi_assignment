@@ -1,29 +1,42 @@
-// Category.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FiSearch, FiBox, FiArrowLeft } from 'react-icons/fi';
+import { useDispatch, useSelector } from 'react-redux';
 import CategoryTable from '../components/CategoryTable';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate hook from React Router
+import { useNavigate } from 'react-router-dom'; 
+import { fetchCategories, fetchCategoriesBySearch } from '../redux/reducer/CategorySlice';
+import AddNewPage from "./AddCategory";
+import Modal from "../components/Modal"; 
 
 const Category = ({ onAddNewClick }) => {
   const [showNewCategoryPage, setShowNewCategoryPage] = useState(false);
-  const navigate = useNavigate(); // Initialize useNavigate hook
+  const [searchQuery, setSearchQuery] = useState('');
+  const [showModal, setShowModal] = useState(false); // State to control modal visibility
+  const navigate = useNavigate(); 
+  const dispatch = useDispatch();
+  const categories = useSelector(state => state.categories.data); 
+
+  useEffect(() => {
+    if (searchQuery.trim() === '') {
+      dispatch(fetchCategories());
+    } else {
+      dispatch(fetchCategoriesBySearch(searchQuery));
+    }
+  }, [dispatch, searchQuery]);
 
   const handleAddNewClick = () => {
-    setShowNewCategoryPage(true);
-    onAddNewClick(); // Call parent function to handle "Add New" click in the CategoryPage
+    // Instead of setting showNewCategoryPage, set showModal to true
+    setShowModal(true);
+    onAddNewClick(); 
   };
 
-  const data = [
-    { id: 1, name: 'Milk', description: 'Lorem Ipsum', status: 'Active' },
-    { id: 2, name: 'Fruits', description: 'Lorem Ipsum', status: 'Inactive' },
-    // Add more data as needed
-  ];
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
 
   return (
     <div className="m-2 shadow-xl h-screen mr-6">
       <div className="header flex justify-between items-center p-4">
         {showNewCategoryPage ? (
-          // If showing new category page, display back button
           <div className="title flex items-center">
             <button onClick={() => setShowNewCategoryPage(false)} className="text-primary">
               <FiArrowLeft className="mr-2" />
@@ -31,7 +44,6 @@ const Category = ({ onAddNewClick }) => {
             </button>
           </div>
         ) : (
-          // If not showing new category page, display Category title
           <div className="title flex items-center">
             <FiBox className="mr-2" />  <span className=" hidden md:block">Category</span> 
           </div>
@@ -46,10 +58,13 @@ const Category = ({ onAddNewClick }) => {
                 type="text"
                 placeholder="Search..."
                 className="px-3 py-1 w-full md:w-[30rem] bg-transparent focus:outline-none"
+                value={searchQuery}
+                onChange={handleSearchChange}
               />
             </div>
             <div className="addbtn">
-              <button onClick={handleAddNewClick} className="bg-primary rounded-md text-white py-3 md:py-2 px-4 text-sm md:text-md">
+              {/* Modify the onClick handler to handle modal */}
+              <button onClick={() => setShowModal(true)} className="bg-primary rounded-md text-white py-3 md:py-2 px-4 text-sm md:text-md">
                 Add New
               </button>
             </div>
@@ -57,9 +72,17 @@ const Category = ({ onAddNewClick }) => {
         )}
       </div>
       {showNewCategoryPage ? ( 
-        <NewCategoryPage />
+        <div>hello</div>
+        // <NewCategoryPage />
       ) : (
-        <CategoryTable data={data} /> 
+        <CategoryTable data={categories} /> 
+      )}
+      {/* Render modal if showModal state is true */}
+      {showModal && (
+        <Modal  onClose={() => setShowModal(false)}>
+        
+          <AddNewPage onClose={() => setShowModal(false)} />
+        </Modal>
       )}
     </div>
   );

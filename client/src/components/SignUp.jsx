@@ -48,7 +48,12 @@ const SignUp = () => {
       <div className="absolute inset-0 bg-white opacity-50 z-20"></div>
       <form onSubmit={handleSubmit} className="mt-10 w-[530px] relative z-20 bg-white rounded-lg shadow-xl p-8">
         <div className="text-center mb-8">
-          <h2 className="text-md text-gray">Welcome to Digitalflake Admin</h2>
+        <img
+                src="https://s3-alpha-sig.figma.com/img/9e94/6a94/4ef20bfd62fdde437d3084005e68980d?Expires=1711929600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=f3k7BbLS1ZCOyhtNEu1X~mFsKmPn~9AvZtoKq9u~tIkrDJakrQR95wr~x7Iu41r16AIE0QzkD0ECT3tlIcnX88aONIqMlmR3udv2tMlJhKDhbtCqEwG5SBrhBTFdoX3rl-MQ-2OHrU8N9IyL~dsiIkbUTDwcXZ6z9v-9zxp2F~3puBaBIGS0~iPJHDQC8yVXCB72dExnc4Pok2teadkqPkMpjsweuS9KMFlUbakN4wvJaE7HXsFi72SDO7X4EfsENMp8Dx9BhUdftMMv0qNZy5w8LhrT3mo6UHuiTIzEOSBef10RHcnsEaxXenzPtjGW1iJIRNBbwjIHygmLTdNbVQ__"
+                alt="Logo"
+                className="inline-block w-28 "
+              />
+          <h2 className="text-md text-gray">Welcome to digitalflake Admin</h2>
         </div>
         <Box
           component="div"

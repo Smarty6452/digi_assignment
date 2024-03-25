@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar";
 import WelcomePage from "./WelcomePage";
 import CategoryPage from "./Category";
 import ProductsPage from "./ProductsPage";
-import NewCategoryPage from "./AddItem"; 
+// import NewCategoryPage from "./AddItem"; 
 import ProductItem from "./AddProduct"; 
 import { IoIosHome } from "react-icons/io";
 import { FaBoxesStacked } from "react-icons/fa6";
@@ -65,7 +65,7 @@ const Home = () => {
           {selectedMenu === "home" && <WelcomePage />}
           {selectedMenu === "category" && <CategoryPage onAddNewClick={() => setSelectedMenu("new-category")} />}
           {selectedMenu === "products" && <ProductsPage onAddNewClick={() => setSelectedMenu("new-product")} />}
-          {selectedMenu === "new-category" && <NewCategoryPage />}
+          {/* {selectedMenu === "new-category" && <NewCategoryPage />} */}
           {selectedMenu === "new-product" && <ProductItem />}
         </div>
       </section>

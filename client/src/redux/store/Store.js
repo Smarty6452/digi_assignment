@@ -1,10 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
-import authReducer from '../reducer/UserSlice'; // Update the path according to your directory structure
+import authReducer from '../reducer/UserSlice'; 
+import categoryReducer from '../reducer/CategorySlice'; 
+import productReducer from '../reducer/ProductSlice'; 
 
 const store = configureStore({
   reducer: {
     auth: authReducer,
-    // Add other reducers here if any
+    categories: categoryReducer,
+    product: productReducer,
+  
   },
 });
 

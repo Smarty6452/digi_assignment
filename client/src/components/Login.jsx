@@ -39,7 +39,11 @@ const Login = () => {
       } else {
         // Save token to local storage
         localStorage.setItem("token", response.payload.token);
+        console.log(localStorage.getItem('token'));
+        // console.log(localStorage);
+
         alert("Login successful!");
+
         history("/");
       }
     } catch (error) {
@@ -82,7 +86,7 @@ const Login = () => {
                 className="inline-block w-28 "
               />
               <h2 className="text-md text-gray">
-                Welcome to Digitalflake Admin
+                Welcome to digitalflake Admin
               </h2>
             </div>
             <TextField
